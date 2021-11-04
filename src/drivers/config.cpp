@@ -30,17 +30,12 @@ void config_read(const char *name, config_t *cfg)
 
     cfg->is_vaild       = prefs.getUInt("is_vaild", 0);
 
-    cfg->default_ssid   = prefs.getString("default_ssid", "Seven");
-    cfg->default_key    = prefs.getString("default_key", "zhang28jian28");
-    cfg->wifi_ssid      = prefs.getString("wifi_ssid", "BDFLY");
-    cfg->wifi_key       = prefs.getString("wifi_key", "20210818");
-    cfg->wifi1_ssid     = prefs.getString("wifi_ssid", "Seven");
-    cfg->wifi1_key      = prefs.getString("wifi_key", "zhang28jian28");
-
-    // cfg->wifi1_ssid     = prefs.getString("wifi1_ssid", "Seven");
-    // cfg->wifi1_key      = prefs.getString("wifi1_key", "zhang28jian28");
-    // cfg->wifi2_ssid     = prefs.getString("wifi2_ssid", "Seven");
-    // cfg->wifi2_key      = prefs.getString("wifi2_key", "zhang28jian28");
+    cfg->default_ssid   = prefs.getString("default_ssid", "123456");
+    cfg->default_key    = prefs.getString("default_key", "123456");
+    cfg->wifi_ssid      = prefs.getString("wifi_ssid", "123456");
+    cfg->wifi_key       = prefs.getString("wifi_key", "123456");
+    cfg->wifi1_ssid     = prefs.getString("wifi_ssid", "123456");
+    cfg->wifi1_key      = prefs.getString("wifi_key", "123456");
 
     cfg->city_name      = prefs.getString("city_name", "南山");
     cfg->qweather_key   = prefs.getString("qweather_key", "1defc3463b4947f98c1c9adb9420c7ed");
