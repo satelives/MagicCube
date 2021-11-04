@@ -1,4 +1,8 @@
 # MagicCube 基于ESP32开发的小魔方
+项目idea参考：稚晖君的 holoCubic https://www.oschina.net/p/holocubic
+ESP32的主频不要开太高（我开的80MHz），240MHz功耗太大，芯片发的热会把热熔胶融化，同时LDO供电也扛不住，实际上我板载的LDO给ESP供电，另外搭了一路LDO给液晶屏供电
+程序仅供参考
+
 ## 基本功能
 ### 1. 时钟
     - DS3231高精度时钟模块，断电后持续计时
