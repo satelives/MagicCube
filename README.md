@@ -47,6 +47,15 @@
 	#define TFT_DC    26
 	#define TFT_RST   33  // Connect reset to ensure display initialises  
   ~~~
+   - ST7789_Rotation.h 加入以下代码，用于修改屏幕镜像以配合棱镜，其他屏幕驱动请参考屏幕驱动的手册来修改
+  ~~~
+      // 镜像屏幕
+    case 4:
+      writedata(TFT_MAD_MX  | TFT_MAD_COLOR_ORDER);
+      _width = _init_height;
+      _height = _init_width;
+      break;
+  ~~~
    - 主目录下，drivers/display.cpp 这三行代码可以把屏幕刷成白色，具体tft-espi库的使用请百度：
   ~~~
 	tft.begin();
@@ -56,19 +65,18 @@
    - lib目录下为开源的 ArduinoJson、lvgl、RTClib，无法上传上来，请去对应的仓库下载
    - RTClib 进行了修改，在 RTClib.cpp 末尾增加了以下代码
   ~~~
-   	uint8_t RTC_DS3231::enable_battery(void)
-	{
-	  uint8_t status = read_i2c_register(DS3231_ADDRESS, DS3231_CONTROL, RTCWireBus);
-	  status &= 0x0F; // clear bit7
-	  write_i2c_register(DS3231_ADDRESS, DS3231_STATUSREG, status, RTCWireBus);
-	  return status;
-	}
-
-	uint8_t RTC_DS3231::get_control_status(void)
-	{
-	  uint8_t status = read_i2c_register(DS3231_ADDRESS, DS3231_CONTROL, RTCWireBus);
-	  return status;
-	}
+    uint8_t RTC_DS3231::enable_battery(void)
+    {
+        uint8_t status = read_i2c_register(DS3231_ADDRESS, DS3231_CONTROL, RTCWireBus);
+        status &= 0x0F; // clear bit7
+	write_i2c_register(DS3231_ADDRESS, DS3231_STATUSREG, status, RTCWireBus);
+	return status;
+    }
+    uint8_t RTC_DS3231::get_control_status(void)
+    {
+       uint8_t status = read_i2c_register(DS3231_ADDRESS, DS3231_CONTROL, RTCWireBus);
+       return status;
+    }
   ~~~
   - RTClib.h 347行 增加接口
   ~~~
