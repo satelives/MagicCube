@@ -53,6 +53,28 @@
 	tft.setRotation(4); /* mirror */
 	tft.fillScreen(TFT_BLACK);
   ~~~
+   - lib目录下为开源的 ArduinoJson、lvgl、RTClib，无法上传上来，请去对应的仓库下载
+   - RTClib 进行了修改，在 RTClib.cpp 末尾增加了以下代码
+  ~~~
+   	uint8_t RTC_DS3231::enable_battery(void)
+	{
+	  uint8_t status = read_i2c_register(DS3231_ADDRESS, DS3231_CONTROL, RTCWireBus);
+	  status &= 0x0F; // clear bit7
+	  write_i2c_register(DS3231_ADDRESS, DS3231_STATUSREG, status, RTCWireBus);
+	  return status;
+	}
+
+	uint8_t RTC_DS3231::get_control_status(void)
+	{
+	  uint8_t status = read_i2c_register(DS3231_ADDRESS, DS3231_CONTROL, RTCWireBus);
+	  return status;
+	}
+  ~~~
+  - RTClib.h 347行 增加接口
+  ~~~
+    uint8_t enable_battery();
+    uint8_t get_control_status();
+  ~~~
 ### 3.关于配置
   - drivers/config.cpp
   ~~~
